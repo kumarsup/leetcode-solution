@@ -14,20 +14,13 @@ head, curr, tail
 class Solution:
     def treeToDoublyList(self, root: 'Optional[Node]') -> 'Optional[Node]':
         if not root: return root
-        nodelist = []
-        
-        def dfs(node):
-            nonlocal nodelist
-            if not node: return 
-            dfs(node.left)
-            nodelist.append(node)
-            dfs(node.right)
-        dfs(root)
-        
         head, curr = None, None
         last = TreeNode(-1)
         
-        for node in nodelist:
+        def dfs(node):
+            nonlocal head, last, curr
+            if not node: return 
+            dfs(node.left)
             curr = TreeNode(node.val)
             
             if not head:
@@ -37,6 +30,9 @@ class Solution:
             curr.left = last
             last.right = curr
             last = curr
+            dfs(node.right)
+            
+        dfs(root)
             
         head.right.left = last
         last.right = head.right
