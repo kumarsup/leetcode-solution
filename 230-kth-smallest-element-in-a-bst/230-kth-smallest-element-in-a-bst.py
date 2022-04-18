@@ -36,13 +36,16 @@ class Solution:
         stack = []
         insertLeft(root)
         
-        while stack:           
-            node = stack.pop()
+        while stack:      
+            while root:
+                stack.append(root)
+                root = root.left
+                
+            root = stack.pop()
             k -= 1
             if k == 0: 
-                return node.val
-            if node.right: 
-                insertLeft(node.right)
+                return root.val
+            root = root.right
         return -1
             
             
