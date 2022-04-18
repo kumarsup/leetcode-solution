@@ -1,24 +1,20 @@
 class Solution:
     def countSubstrings(self, s: str) -> int:
-        n = len(s)
-        res = 0
+        n, res = len(s), 0
         
-        for idx in range(n):
-            i, j = idx, idx        
-            while i >= 0 and j < n:
-                if s[i] != s[j]:
+        def countPalindrome(left, right):
+            count = 0
+            while left >= 0 and right < n:
+                if s[left] != s[right]:
                     break
-                res+=1
-                i -= 1
-                j += 1
-            
-            i, j = idx, idx+1       
-            while i >= 0 and j < n:
-                if s[i] != s[j]:
-                    break
-                res+=1
-                i -= 1
-                j += 1
+                count += 1
+                left -= 1
+                right += 1
+            return count
+        
+        for idx in range(n):    
+            res += countPalindrome(idx, idx)
+            res += countPalindrome(idx, idx+1)
         return res
         
         
