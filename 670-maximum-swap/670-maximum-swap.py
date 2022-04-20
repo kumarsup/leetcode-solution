@@ -2,20 +2,19 @@ class Solution:
     def maximumSwap(self, num: int) -> int:
         nums = list(str(num))
         n = len(nums)
+        indexs = [0]*n
+        maxVal, maxIdx = 0, -1
+        
+        for i in range(n-1, -1, -1):
+            if int(nums[i]) > maxVal:
+                maxIdx = i
+                maxVal = int(nums[i])
+            indexs[i] = maxIdx 
         
         for i in range(n):
-            maxVal = 0
-            maxIdx = -1
-            j = n-1
-            while j > i:
-                if int(nums[j]) > maxVal:
-                    maxIdx = j
-                    maxVal = int(nums[j])
-                j-=1
-
-            if maxIdx != -1 and int(nums[i]) <  int(nums[maxIdx]):
+            maxIdx = indexs[i]
+            if int(nums[i]) <  int(nums[maxIdx]):
                 nums[i], nums[maxIdx] = nums[maxIdx], nums[i]
                 break
-                
         return int(''.join(nums))
             
