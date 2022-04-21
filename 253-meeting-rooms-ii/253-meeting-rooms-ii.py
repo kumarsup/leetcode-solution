@@ -1,21 +1,16 @@
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         intervals.sort(key = lambda x: (x[0], x[1]))
-        n = len(intervals)
-        if n == 0: return 0
         
-        maxSize, counter, heap = 0, 0, []     
+        maxSize, counter, heap, n = 0, 0, [], len(intervals)
+        
         for i in range(n):
             start, end = intervals[i]
-            
-            while heap and heap[0][0] <= start:
-                heapq.heappop(heap)
-                
-            if not heap or heap[0][0] > start:
-                heapq.heappush(heap, (end, counter, start))
-            
-            counter+=1
+            while heap and heap[0][0] <= start: heapq.heappop(heap)
+            if not heap or heap[0][0] > start: heapq.heappush(heap, (end, counter, start))
             maxSize = max(maxSize, len(heap))
+            counter+=1
+        
         return maxSize
             
 '''
