@@ -6,11 +6,9 @@ class Solution:
         
         for i in range(n):
             start, end = intervals[i]
-            while heap and heap[0][0] <= start: heapq.heappop(heap)
-            if not heap or heap[0][0] > start: heapq.heappush(heap, (end, counter, start))
+            while heap and heap[0] <= intervals[i][0]: heapq.heappop(heap)
+            if not heap or heap[0] > intervals[i][0]: heapq.heappush(heap, intervals[i][1])
             maxSize = max(maxSize, len(heap))
-            counter+=1
-        
         return maxSize
             
 '''
