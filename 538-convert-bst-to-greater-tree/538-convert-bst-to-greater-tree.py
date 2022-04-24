@@ -12,7 +12,6 @@ class Solution:
         def dfs(node):
             nonlocal subsum
             if not node: return 0
-            
             dfs(node.right)
             subsum += node.val
             node.val = subsum
