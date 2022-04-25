@@ -7,25 +7,16 @@
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root: return []
-        res = defaultdict(list)
-        queue = deque([root])
-        depth = 0
+        res, depth, queue = defaultdict(list), 0, deque([root])
         
         while queue:
             size = len(queue)
             for _ in range(size):
                 node = queue.popleft()
-                if depth%2:
-                    res[depth].insert(0, node.val)
-                else:
-                    res[depth].append(node.val)
-                
-                if node.left:
-                    queue.append(node.left)
-                    
-                if node.right:
-                    queue.append(node.right)
-                    
+                if depth%2: res[depth].insert(0, node.val)
+                else: res[depth].append(node.val)
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
             depth += 1
         return res.values()
             
