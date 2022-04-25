@@ -50,7 +50,6 @@ class Solution:
         for vals in maps.values():
             if xx < 0:
                 vals = reverse(vals)
-            for num in vals:
-                res.append(num)
+            res+=vals
             xx*=-1
         return res
