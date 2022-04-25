@@ -1,13 +1,11 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         n = len(nums)
-        lastPos = n-1
+        lastPosition = n-1
         for i in range(n-1, -1, -1):
-            if i + nums[i] >= lastPos:
-                lastPos = i
-        return lastPos == 0
-        
-        
+            if i + nums[i] >= lastPosition:
+                lastPosition = i
+        return lastPosition == 0
         
         
         
