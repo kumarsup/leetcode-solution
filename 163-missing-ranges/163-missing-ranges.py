@@ -13,20 +13,19 @@ curr - prev > 1 -> True
 
 class Solution:
     def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:
-        
-        def formatRange(lower, upper):
-            if lower + 2 == upper:
-                return str(lower+1)
-            return str(lower+1) + "->" + str(upper-1)
-        
         nums = [lower-1] + nums + [upper+1]
-        res, n = [], len(nums)
+        n, res = len(nums), []
+        
+        def formatValue(low, high):
+            if low + 2 == high:
+                return str(low+1)
+            return str(low+1) + '->' + str(high-1)
         
         for i in range(1, n):
             prev, curr = nums[i-1], nums[i]
             if curr - prev > 1:
-                val = formatRange(prev, curr)
+                val = formatValue(prev, curr)
                 res.append(val)
         return res
-        
-        
+                
+       
