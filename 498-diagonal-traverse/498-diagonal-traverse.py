@@ -30,26 +30,72 @@ class Solution:
         
         rows = len(mat)
         cols = len(mat[0])
-        maps = defaultdict(list)
         
-        for r in range(rows):
-            for c in range(cols):
-                maps[r+c].append(mat[r][c])
-
-        res = []
-        xx = -1
+        direction, res = 1, []
+        r, c = 0, 0
         
-        def reverse(nums):
-            left, right = 0, len(nums)-1
-            while left < right:
-                nums[left], nums[right] = nums[right], nums[left]
-                left+=1
-                right-=1
-            return nums
-            
-        for vals in maps.values():
-            if xx < 0:
-                vals = reverse(vals)
-            res+=vals
-            xx*=-1
+        while len(res) < rows*cols:
+            res.append(mat[r][c])
+            if direction == 1:
+                if r == 0 and c < cols-1:
+                    c+=1
+                    direction*=-1
+                elif c == cols-1:
+                    r+=1
+                    direction*=-1
+                else:
+                    r-=1
+                    c+=1
+            else:
+                if c == 0 and r < rows-1:
+                    r+=1
+                    direction*=-1
+                elif r == rows-1:
+                    c+=1
+                    direction*=-1
+                else:
+                    r+=1
+                    c-=1
         return res
+                    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+#         maps = defaultdict(list)
+        
+#         for r in range(rows):
+#             for c in range(cols):
+#                 maps[r+c].append(mat[r][c])
+
+#         res = []
+#         xx = -1
+        
+#         def reverse(nums):
+#             left, right = 0, len(nums)-1
+#             while left < right:
+#                 nums[left], nums[right] = nums[right], nums[left]
+#                 left+=1
+#                 right-=1
+#             return nums
+            
+#         for vals in maps.values():
+#             if xx < 0:
+#                 vals = reverse(vals)
+#             res+=vals
+#             xx*=-1
+#         return res
