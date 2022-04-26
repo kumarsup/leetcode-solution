@@ -5,30 +5,15 @@
 #         self.left = left
 #         self.right = right
 '''
-left = 
-right = 
-
-val = node.val
-val == 0 and left == 0 and right == 0:
-    node.left = None
-    node.right = None
+node.left = 
+node.right = 
+if node.val == 0 and not node.left and not node.right:
     node = None
-elif left == 0 and right == 0:
-    node.left = None
-    node.right = None
-elif left == None:
-    node.left = None
-elif right == None:
-    node.right = None
-    
 return node
- 
-
 '''
 class Solution:
     def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root: return root
-        
         def dfs(node):
             if not node: return None
             node.left = dfs(node.left) 
