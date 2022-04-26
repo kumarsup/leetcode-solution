@@ -17,25 +17,28 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         
-        def swap(i, j):
-            nums[i], nums[j] = nums[j], nums[i]
+        def swap(index1, index2):
+            nums[index1], nums[index2] = nums[index2], nums[index1]
+        
+        def reverse(left):
+            right = n-1
+            while left < right:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+                right -= 1
             
-        def reverse(i, j):
-            while i < j:
-                nums[i], nums[j] = nums[j], nums[i]
-                i += 1
-                j -= 1
-                
         n = len(nums)
-        i = n-1-1
+        index = n-2
         
-        while i >= 0 and nums[i+1] <= nums[i]:
-            i -= 1
+        while index >= 0 and nums[index+1] <= nums[index]:
+            index -= 1
+            
+        if index >= 0:
+            jidx = n-1
+            while nums[jidx] <= nums[index]:
+                jidx -= 1
+            swap(index, jidx)
+            
+        reverse(index+1)
         
-        if i >= 0:
-            j = n-1
-            while nums[j] <= nums[i]:
-                j -= 1
-            swap(i, j)
-        reverse(i+1, n-1)
-        
+            
