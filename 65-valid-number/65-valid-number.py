@@ -1,35 +1,30 @@
 '''
     regex - 
-    write validate method - 
-        - + or - can be only 
-            - in the start of the string 
-            - after e
-        - every digit should be in 0 to 9 and e/E and +- and .
-        - +- can me multiple times in start of the string
-        - 
-        
-        
-
+    - write validate functions
+        - digit, dot, e, sign
+        - +/- only can be at 0th index or just after e
+        - e should be after digit and before few digit
+        - . can be only once and only before e
 '''
 class Solution:
     def isNumber(self, s: str) -> bool:
-        seenDigit, seenExponent, seenDot = False, False, False
+        seenDigit, seenExpo, seenDot = False, False, False
         
         for i, c in enumerate(s):
             if c.isdigit():
                 seenDigit = True
-            elif c in ['+', '-']:
-                if i > 0 and s[i-1] != 'e' and s[i-1] != 'E':
+            elif c in '+-':
+                if i > 0 and s[i-1] not in 'eE':
                     return False
-            elif c in ['e', 'E']:
-                if seenExponent or not seenDigit:
-                    return False
-                seenExponent = True
+            elif c in 'eE':
+                if seenExpo or not seenDigit: return False
+                seenExpo = True
                 seenDigit = False
             elif c == '.':
-                if seenDot or seenExponent: return False
+                if seenDot or seenExpo: return False
                 seenDot = True
             else:
                 return False
         return seenDigit
                 
+            
