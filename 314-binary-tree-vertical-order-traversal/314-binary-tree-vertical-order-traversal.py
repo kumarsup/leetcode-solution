@@ -7,26 +7,29 @@
 class Solution:
     def verticalOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root: return []
-        minCol, maxCol = float('inf'), float('-inf')
         
-        def dfs(node, hashmap, col = 0, row = 0):
-            nonlocal minCol, maxCol
-            
+        hashmap = defaultdict(list)
+        minIndex, maxIndex = float('inf'), float('-inf')
+        
+        def dfs(node, row = 0, col = 0):
+            nonlocal minIndex, maxIndex, hashmap
             if not node: return
-            minCol = min(minCol, col)
-            maxCol = max(maxCol, col)
+            minIndex = min(minIndex, col)
+            maxIndex = max(maxIndex, col)
             
             hashmap[col].append((node.val, row))
+            dfs(node.left, row+1, col-1)
+            dfs(node.right, row+1, col+1) 
             
-            dfs(node.left, hashmap, col-1, row+1)
-            dfs(node.right, hashmap, col+1, row+1)
-            
-            
-        hashmap = defaultdict(list)
-        dfs(root, hashmap)
+        dfs(root)
         res = []
-        for col in range(minCol, maxCol+1):
-            items = hashmap[col]
-            vals = [val for val, row in sorted(items, key = lambda x: x[1])]
-            res.append(vals)
+        #print(minIndex, maxIndex, hashmap)
+        for col in range(minIndex, maxIndex+1):
+            val = [val for val, row in sorted(hashmap[col], key = lambda x: x[1])]
+            res.append(val)
         return res
+            
+        
+        
+        
+            
