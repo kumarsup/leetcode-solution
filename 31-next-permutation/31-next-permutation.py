@@ -1,44 +1,46 @@
 '''
-[1,2,3] - [1,3,2]
-[1,2,5,3] - [1,3,2,5] - [1,3,5,2] - [1,3,{5,2}] reverse
+find i > i-1
+j = i
+find i > j
+    swap
+revese(i)
 
-right = n-1
-start iterate from right and find small val at index i 
-    - swap the item on ith and right index 
-    - reverse the sub array i+1 to right
-[1,2,6,5,4,3] - [1,3,6,5,4,2] - [1,3,2,4,5,6]
-251 - 521 - 512
-
+- 1258764 - 12 5 8764 -> 12 5 876 4 - > 12 6 875 4 -> 1264578
+- 1264578
 '''
-
 class Solution:
     def nextPermutation(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
         
-        def swap(index1, index2):
-            nums[index1], nums[index2] = nums[index2], nums[index1]
-        
         def reverse(left):
             right = n-1
             while left < right:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
-                right -= 1
+                swap(left, right)
+                left, right = left+1, right-1
+        
+        def swap(left, right):
+            nums[left], nums[right] = nums[right], nums[left]
             
         n = len(nums)
-        index = n-2
+        i = n-2
         
-        while index >= 0 and nums[index+1] <= nums[index]:
-            index -= 1
+        while i >= 0 and nums[i+1] <= nums[i]:
+            i -= 1
             
-        if index >= 0:
-            jidx = n-1
-            while nums[jidx] <= nums[index]:
-                jidx -= 1
-            swap(index, jidx)
+        if i >= 0:
+            j = n-1
+            while j >= 0 and nums[j] <= nums[i]:
+                j -= 1
+            swap(i, j)    
             
-        reverse(index+1)
+        reverse(i+1)
+        
+        return nums
         
             
+            
+            
+            
+        
