@@ -7,15 +7,16 @@ class Solution:
         while i < wn and j < an:
             num = 0
             while j < an and abbr[j].isdigit():
-                num = num * 10 + int(abbr[j])
+                num = num*10 + int(abbr[j])
                 if not num: return False
-                j+=1
-            
+                j += 1
+                
             if num > 0:
                 if i + num > wn: return False
-                i += num
+                i = i + num
             else:
                 if word[i] != abbr[j]: return False
-                i, j = i+1, j+1
+                i+=1
+                j+=1
         return i == wn and j == an
             
