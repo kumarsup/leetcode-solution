@@ -15,44 +15,42 @@ s = "aaabbcc", words = ["aaa","aab","bc"]
 class Solution:
     def addBoldTag(self, s: str, words: List[str]) -> str:
         
-        def findPatterns(word):
-            patt = []
-            i, matchIndex = 0, s.find(word, 0)
-            while matchIndex != -1:
-                patt.append([matchIndex, matchIndex + len(word)])
-                i = matchIndex + 1
-                matchIndex = s.find(word, i)
-            return patt
+        def findMatchIntervals(word):
+            i, match, res = 0, s.find(word, 0), []
+            while match != -1:
+                res.append([match, match + len(word)])
+                i = match + 1
+                match = s.find(word, i)
+            return res
         
         intervals = []
         
         for word in words:
-            interval = findPatterns(word)
+            interval = findMatchIntervals(word)
             intervals.extend(interval)
-            
+        
         if not intervals: 
             return s
         
         intervals.sort()
         
+        mergedIntervals = []
         
-        mergeIntervals = []
-        
-        #merge interval
         last = intervals[0]
         
         for i in range(1, len(intervals)):
             curr = intervals[i]
             if curr[0] <= last[1]:
-                last[1] = max(last[1], curr[1])
+                last[1] = max(curr[1], last[1])
             else:
-                mergeIntervals.append(last)
+                mergedIntervals.append(last)
                 last = curr
-        mergeIntervals.append(last)
+        mergedIntervals.append(last)
+        
         res = list(s)
         
-        for i in range(len(mergeIntervals)-1, -1, -1):
-            start, end = mergeIntervals[i]
+        for i in range(len(mergedIntervals)-1, -1, -1):
+            start, end = mergedIntervals[i]
             res.insert(end, '</b>')
             res.insert(start, '<b>')
         return ''.join(res)
