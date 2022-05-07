@@ -42,29 +42,36 @@
 #        """
 '''
 [[1,1],2,[1,1]]
-list- 
-def dfs(list, index, depdth):
-    res = 0
-    if index >= llen(list): return 0
+1. 1*2 + 1*2 + 2*1 + 1*2 + 1*2 = 10.
+
+
+ - nList, depth, index = 0
+ res = 0
+ if index >= len(nList): return res
+ item = nList[index]
+ if item.isInteger():
+    res += item.getInteger()*depth
+    res += dfs(nList, index+1, depth)
+else:
+    res += dfs(item, 0, depth+1)
     
-    node = list[index]
-    if node.isInteger():
-        res += node.getInteger() * depdth
-    else:
-        res += dfs(node.getList(), 0, depdth+1)
-    res += dfs(nlist, index+1, depdth)
 return res
+ 
 
 
 '''
 class Solution:
     def depthSum(self, nestedList: List[NestedInteger]) -> int:
-        res = 0
-        def dfs(nlist, index, depdth):
+        
+        def dfs(nList, depth = 1, index = 0):
             res = 0
-            if not nlist or index >= len(nlist): return res
-            node = nlist[index]
-            res += depdth * node.getInteger() if node.isInteger() else dfs(node.getList(), 0, depdth+1)
-            res += dfs(nlist, index+1, depdth)
+            if not nList or index >= len(nList): return  res
+            node = nList[index]
+            res += node.getInteger()*depth if node.isInteger() else dfs(node.getList(), depth+1, 0)
+            res += dfs(nList, depth, index+1)
             return res
-        return dfs(nestedList, 0, 1)
+        return dfs(nestedList)
+    
+    
+    
+    
