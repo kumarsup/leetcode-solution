@@ -14,18 +14,18 @@ if node.right and leftNull: return False
 '''
 class Solution:
     def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
-        queue, leftNull, nodeNull, foundNull = deque([root]), False, False, False
+        queue, nullFound = deque([root]), False 
         
         while queue:
             size = len(queue)
             for _ in range(size):
                 node = queue.popleft()
                 if node:
-                    if foundNull: return False
+                    if nullFound: return False
                     queue.append(node.left)
                     queue.append(node.right)
                 else:
-                    foundNull = True
+                    nullFound = True
         return True
                 
             
