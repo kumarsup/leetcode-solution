@@ -32,6 +32,7 @@ class Solution:
             if s[index] == '-':
                 sign = -1
                 index+=1
+                
             while index < n and s[index].isdigit():
                 val = val*10 + int(s[index])
                 index+=1
@@ -41,14 +42,9 @@ class Solution:
             if index >= n: return None, index
             value, index = getValue(index)
             node = TreeNode(value)
-            
-            if index < n and s[index] == '(':
-                node.left, index = constructTree(index+1)
-                
-            if node.left and index < n and s[index] == '(':
-                node.right, index = constructTree(index+1)
-                
-            return node, index+1 if index < n and s[index] == ')' else index
+            if index < n and s[index] == '(': node.left, index = constructTree(index+1)
+            if node.left and index < n and s[index] == '(': node.right, index = constructTree(index+1)
+            return node, index+1
         
         return constructTree(0)[0]
                 
