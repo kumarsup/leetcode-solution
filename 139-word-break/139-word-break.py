@@ -38,15 +38,15 @@ class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         trie, dp = Trie(), {}
         for word in wordDict: trie.insert(word) 
+        
         def dfs(idx, node):
             nonlocal trie, dp
             key = (idx, id(node))
             if key in dp: return dp[key]
-            
             if idx >= len(s): return node.eow
             if node.eow and dfs(idx, trie.root):  return True
-            if s[idx] in node.child and dfs(idx+1, node.child[s[idx]]): return True
-            dp[key] = False
-            return False
+            dp[key] = s[idx] in node.child and dfs(idx+1, node.child[s[idx]])
+            return dp[key]
+        
         return dfs(0, trie.root)
     
