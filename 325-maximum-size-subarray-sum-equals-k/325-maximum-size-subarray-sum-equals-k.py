@@ -19,17 +19,10 @@ return len
 '''
 class Solution:
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
-        sumA, maxLen, n = 0, 0, len(nums)
-        hashmap = {0: -1}
-        
-        for right in range(n):
-            sumA += nums[right]
-                
-            if sumA-k in hashmap:
-                index = hashmap[sumA-k]
-                maxLen = max(maxLen, right - index)
-                
-            if sumA not in hashmap:
-                hashmap[sumA] = right
+        sumA, maxLen, n, idxMap = 0, 0, len(nums), {0:-1}
+        for idx in range(n):
+            sumA += nums[idx]
+            if sumA-k in idxMap: maxLen = max(maxLen, idx - idxMap[sumA-k])
+            if sumA not in idxMap: idxMap[sumA] = idx
         return maxLen
-            
+    
