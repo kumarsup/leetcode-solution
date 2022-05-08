@@ -1,5 +1,5 @@
 '''
-vals = {1: 1, 2: 5, 8: 8, 6: 9, 9: 6}
+vals = {1: 1, 8: 8, 6: 9, 9: 6}
 
 '''
 
@@ -7,15 +7,11 @@ class Solution:
     def isStrobogrammatic(self, num: str) -> bool:
         vals = {'0':'0', '1': '1', '8': '8', '6': '9', '9': '6'}
         n = len(num)
-        left, right = 0, n-1
-        
-        while left <= right:
-            if num[left] not in vals: return False
-            if num[right] not in vals: return False
-            if num[left] != vals[num[right]]:
+        i, j = 0, n-1
+        while i <= j:
+            if num[i] not in vals or vals[num[i]] != num[j]:
                 return False
-            left, right = left+1, right-1
+            i, j = i+1, j-1
         return True
             
-        
-       
+    
