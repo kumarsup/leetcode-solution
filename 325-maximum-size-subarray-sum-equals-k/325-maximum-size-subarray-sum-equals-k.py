@@ -20,13 +20,10 @@ return len
 class Solution:
     def maxSubArrayLen(self, nums: List[int], k: int) -> int:
         sumA, maxLen, n = 0, 0, len(nums)
-        hashmap = {}
+        hashmap = {0: -1}
         
         for right in range(n):
             sumA += nums[right]
-            
-            if sumA == k:
-                maxLen = right + 1
                 
             if sumA-k in hashmap:
                 index = hashmap[sumA-k]
