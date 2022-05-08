@@ -7,28 +7,25 @@ numCourses = 2, prerequisites = [[1,0],[0,1]]
 '''
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = defaultdict(list)
+        graph = collections.defaultdict(list)
+        
         for a, b in prerequisites:
             graph[b].append(a)
             
-        def checkCycle(node, seen, checked):
+        def dfs(node, seen, checked):
             if checked[node]: return False
             if seen[node]: return True
-            
             seen[node] = True
-            
-            if node in graph:
-                for nei in graph[node]:
-                    if checkCycle(nei, seen, checked): return True
-            seen[node] = False
+            for nei in graph[node]:
+                 if dfs(nei, seen, checked): return True
             checked[node] = True
+            seen[node] = False
             return False
+    
+        seen = [None]*numCourses
+        checked = [None]*numCourses
         
-        checked, seen, res = [None]*numCourses, [None]*numCourses, False
         for cource in range(numCourses):
-            if cource not in seen:
-                if checkCycle(cource, seen, checked): return False
+            if dfs(cource, seen, checked): return False
         return True
             
-        
-        
