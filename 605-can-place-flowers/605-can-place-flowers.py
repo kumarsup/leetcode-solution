@@ -9,4 +9,5 @@ class Solution:
                 if leftEmpty and rightEmpty:
                     flowerbed[i] = 1
                     count+=1
+                    if count >= n: return True
         return count >= n
