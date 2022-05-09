@@ -1,9 +1,11 @@
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
-        hmap = {}
+        hset = set()
         
         for i, num in enumerate(nums):
-            if num in hmap and i - hmap[num] <= k: return True
-            hmap[num] = i
+            if num in hset: return True
+            hset.add(num)
+            if len(hset) > k:
+                hset.remove(nums[i-k])
         return False
         
