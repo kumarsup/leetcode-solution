@@ -10,14 +10,13 @@ class Solution:
         
         def dfs(node):
             if not node: return None
-            
             left = dfs(node.left)
             right = dfs(node.right)
             
-            if (left and right) or node in [p, q]:
+            if node in [p, q] or (left and right):
                 return node
             
             return left or right
-        
+            
         return dfs(root)
             
