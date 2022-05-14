@@ -10,19 +10,15 @@ SC - O(1)
 class Solution:
     def isPalindrome(self, s: str) -> bool:
         n = len(s)
-        i, j = 0, n-1
+        left, right = 0, n-1
         
-        while i < j:
-            if not s[i].isalnum():
-                i+=1
-                continue
-                
-            if not s[j].isalnum():
-                j-=1
-                continue
-                
-            if s[i].lower() != s[j].lower():
+        while left < right:
+            if not s[left].isalnum():
+                left += 1
+            elif not s[right].isalnum():
+                right -= 1
+            elif s[left].lower() != s[right].lower():
                 return False
-            i += 1
-            j -= 1
+            else:
+                left, right = left+1, right-1
         return True
