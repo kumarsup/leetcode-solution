@@ -13,11 +13,11 @@ class Solution:
         i, j = 0, n-1
         
         while i < j:
-            if i < n and not s[i].isalnum():
+            if not s[i].isalnum():
                 i+=1
                 continue
                 
-            if j >= 0 and not s[j].isalnum():
+            if not s[j].isalnum():
                 j-=1
                 continue
                 
