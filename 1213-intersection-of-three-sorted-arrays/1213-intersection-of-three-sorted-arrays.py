@@ -16,10 +16,10 @@ class Solution:
             if arr1[i] == arr2[j] == arr3[k]:
                 res.append(arr1[i])
                 i, j, k = i+1, j+1, k+1
-            elif arr1[i] < arr2[j] or arr1[i] < arr3[k]:
+            elif arr1[i] < arr2[j]:
                 i+=1
-            elif arr2[j] < arr1[i] or arr2[j] < arr3[k]:
+            elif arr2[j] < arr3[k]:
                 j+=1
-            elif arr3[k] < arr1[i] or arr3[k] < arr2[j]:
+            else:
                 k+=1
         return res
