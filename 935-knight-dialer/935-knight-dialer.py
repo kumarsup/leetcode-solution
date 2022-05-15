@@ -20,6 +20,7 @@ class Solution:
                 memo[(i,n)] = 0
                 for nei in neighbors[i]:
                     memo[(i,n)] += helper(nei, n-1)
+                    memo[(i,n)] %= 10**9+7
             return memo[(i,n)]
         res = 0
         for i in range(10):
