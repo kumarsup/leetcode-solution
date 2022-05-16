@@ -15,20 +15,20 @@ class Solution:
         digitSeen, expoSeen, dotSeen = False, False, False
         n = len(s)
         
-        for i in range(n):
-            if s[i].isdigit():
+        for index in range(n):
+            char = s[index]
+            
+            if char.isdigit():
                 digitSeen = True
-            elif s[i] in '+-':
-                if i > 0 and s[i-1] not in 'eE': return False
-            elif s[i] == '.':
+            elif char in '-+':
+                if index > 0 and s[index-1] not in 'eE': return False
+            elif char == '.':
                 if dotSeen or expoSeen: return False
                 dotSeen = True
-            elif s[i] in 'eE':
+            elif char in 'eE':
                 if not digitSeen or expoSeen: return False
                 expoSeen = True
                 digitSeen = False
             else: 
                 return False
         return digitSeen
-        
-        
