@@ -1,57 +1,71 @@
 '''
 operators = ['+', '-', '/', '*']
 list of chars
+index, prev, curr, val, path
+0   0   0   0   []
 
-backtrack(index = 0, expr, ) 
-    if len expr  == n:
-        eval(expr) == target:
-            res.appand(''.join(path))
-            return
-            
-    for idx in range(index, n):
-        op in operators:
-            ch + op 
+curr = curr*10 + int(s[index])
+
+NO OPP:
+backtrack(index+1, prev, curr, val, path)
+ 
+if path:
+
+    #ADD
+    
+    
+    #SUBSTRACTION
+    
+    
+    #MULTIPLEICATION
+ 
+ 
+
 '''
 class Solution:
     def addOperators(self, num: str, target: int) -> List[str]:
-        
-        res = []
-        n = len(num)
+        res, n = [], len(num)
         
         def backtrack(index, prev, curr, val, path):
-            nonlocal res
             if index == n:
                 if val == target and curr == 0:
                     res.append(''.join(path[1:]))
                 return
             
             curr = curr*10 + int(num[index])
-            str_op = str(curr)
+            currOP = str(curr)
             
             if curr > 0:
+                #NO OPP
                 backtrack(index+1, prev, curr, val, path)
-            
+                
             #ADD
             path.append('+')
-            path.append(str_op)
+            path.append(currOP)
             backtrack(index+1, curr, 0, val+curr, path)
             path.pop()
             path.pop()
             
             if path:
-                #SUBSTRACTION
+                #SUBS
                 path.append('-')
-                path.append(str_op)
+                path.append(currOP)
                 backtrack(index+1, -curr, 0, val-curr, path)
                 path.pop()
                 path.pop()
                 
-                 #MULTIPLICATION
+                #MULTI
                 path.append('*')
-                path.append(str_op)
-                backtrack(index+1, curr*prev, 0, val-prev + (curr*prev), path)
+                path.append(currOP)
+                backtrack(index+1, prev*curr, 0, val-prev + (prev*curr), path)
                 path.pop()
                 path.pop()
-                
+            
         backtrack(0, 0, 0, 0, [])
         return res
+
+            
+            
+            
+            
+            
