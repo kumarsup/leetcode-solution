@@ -8,8 +8,9 @@ class Solution:
     def countMatches(self, items: List[List[str]], ruleKey: str, ruleValue: str) -> int:
         
         count  = 0 
+        valmap = {"type": 0,  "color": 1, "name": 2}
+        
         for item in items:
-            if ruleKey == "type" and ruleValue == item[0] or ruleKey == "color" and ruleValue == item[1] or ruleKey == "name" and ruleValue == item[2]:
+            if ruleValue == item[valmap[ruleKey]]:
                 count += 1
-                
         return count
