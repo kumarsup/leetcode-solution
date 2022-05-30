@@ -1,45 +1,19 @@
-'''
-s = "lee(t(c ) o ) de )"
-"lee(t(c)o)de"
-
-validate stack - 
-    - add index in stack on start brackets (
-    - pop index in stack on start brackets )
-    - if cant pop then keep the index in stack
-    
-arr = list(s)
-stack = 
-
-validate parentheses
-    if c == '('
-        - stack = add i
-    elif c == ')'
-        if stack: stack pop
-        else
-            arr[i] = ''
-while stack:
-    arr[stack.pop()] = ''
-return ''.join(arr)
-
-TC - O(N)
-SC - O(N)
-
-'''
-
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        stack, arr = [], list(s)
+        stack = []
+        slist = list(s)
         
-        for index in range(len(arr)):
-            if arr[index] == '(':
-                stack.append(index)
-            elif arr[index] == ')':
+        for i in range(len(s)):
+            char = s[i]
+            
+            if char == '(':
+                stack.append(i)
+            elif char == ')':
                 if stack:
                     stack.pop()
                 else:
-                    arr[index] = ''
+                    slist[i] = '' 
         while stack:
-            arr[stack.pop()] = ''
-        
-        return ''.join(arr)
-        
+            slist[stack.pop()] = ''
+            
+        return ''.join(slist)
