@@ -13,6 +13,7 @@ class Solution:
             else:
                 res.append(last)
                 last = curr
+                
         res.append(last)
         return res
         
